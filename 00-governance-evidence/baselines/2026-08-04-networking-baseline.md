@@ -44,12 +44,6 @@ Assess my current ability to retrieve and explain previously studied networking 
 - Correct definition and behaviour of UDP.
 - Complete basic subnet calculations.
 
-## Priority for the Next Session
-
-- Rebuild the relationship between IP addressing, subnet masks, local and remote destinations, ARP, switches, default gateways, and routers.
-- Practise `/24`, `/25`, and `/26` subnet calculations.
-- Validate the concepts in a small Cisco Packet Tracer laboratory with one controlled configuration failure.
-
 ## Limitations
 
 This baseline measures unaided recall at a specific point in time. It does not demonstrate production-level networking competence.
@@ -60,90 +54,108 @@ This baseline measures unaided recall at a specific point in time. It does not d
 
 ## Conditions
 
-- Retrieval attempt completed without consulting notes.
-- Answers were evaluated only after the retrieval attempt.
-- Follow-up retrieval was used to verify concepts that initially required correction.
-- Original baseline results from 2026-08-04 remain unchanged.
-- `Recovered` means the concept could be retrieved again; it does not yet mean long-term retention, reproducibility, or professional competence.
+- Retrieval was attempted without consulting notes.
+- Corrections were reviewed only after the initial answers.
+- Recovered concepts remain subject to delayed retrieval and reproduction.
+- Original baseline results remain unchanged.
 
 ## Retrieval Results
 
-| Topic | Recovery Status | Observation | Next Action |
+| Topic | Status | Evidence | Next Action |
 |---|---|---|---|
-| IP addressing | Recovered | Correctly described an IP address as a logical numerical address associated with a network interface. | Reinforce its Layer 3 role through practical use. |
-| Subnet masks | Recovered | Correctly explained that a subnet mask identifies the network and host portions of an IPv4 address and supports local-versus-remote destination decisions. | Apply the concept to complete subnet calculations. |
-| Local vs remote networks | Recovered | Correctly identified the source IP address, destination IP address, and subnet mask as the basis for determining whether a destination is local or remote. | Practise the decision with different addresses and prefixes. |
-| Default gateway | Recovered | Correctly explained that the default gateway is used when traffic must be sent outside the local network. | Validate its role later in a routed topology. |
-| ARP | Recovered | After the initial ARP/ICMP confusion was corrected, correctly retrieved that ARP resolves an IPv4 address to a MAC address for local Layer 2 delivery using ARP Request and ARP Reply messages. Also distinguished ARP resolution from the later ICMP exchange used by `ping`. | Validate ARP behaviour and Ethernet delivery in Packet Tracer. |
-| Switches and routers | Recovered | Correctly described a switch as forwarding Ethernet frames using MAC information and a router as forwarding IP packets between different networks using routing information. | Refine MAC-table learning and routing-table concepts through practice. |
-| ICMP and ping | Recovered | After clarification, correctly distinguished ICMP from ARP and explained that `ping` uses ICMP Echo Request and Echo Reply messages to test IP reachability. | Validate ICMP Echo Request and Echo Reply in Packet Tracer and reinforce the broader role of ICMP. |
-| TCP and UDP | Recovered | Correctly distinguished TCP connection establishment, reliability, ordering, and retransmission mechanisms from UDP connectionless operation without built-in delivery, ordering, or retransmission guarantees. | Reinforce overhead and protocol behaviour through later packet analysis. |
-| Basic subnet calculation | Not tested | No complete subnet calculation was performed during this recovery session. The original baseline status therefore remains unchanged. | Practise complete `/24`, `/25`, and `/26` subnet calculations. |
+| IP addressing | Recovered | Correctly explained the purpose of an IP address and its role in identifying network interfaces at Layer 3. | Reinforce through delayed retrieval. |
+| Subnet masks | Recovered | Correctly explained that the subnet mask identifies network and host portions and is used to determine whether a destination is local or remote. | Apply to `/24`, `/25`, and `/26` calculations. |
+| Local vs remote networks | Recovered | Correctly explained that a host uses the destination IP address and subnet mask to determine whether direct local delivery or a gateway is required. | Reinforce with different prefixes and routed networks. |
+| Default gateway | Recovered | Correctly explained that remote traffic requires a valid next hop through a default gateway. | Validate with a routed Packet Tracer topology. |
+| ARP | Recovered | Correctly distinguished ARP from DHCP and ICMP and explained IPv4-to-MAC resolution for Layer 2 delivery. | Reinforce gateway ARP behaviour in a routed topology. |
+| Switches and routers | Recovered | Correctly distinguished Layer 2 frame forwarding by switches from Layer 3 packet forwarding between networks by routers. | Validate router operation practically. |
+| ICMP and ping | Recovered | Correctly explained that `ping` uses ICMP Echo Request and Echo Reply to test IP reachability. | Review the limitations of `ping`. |
+| TCP and UDP | Recovered | Correctly distinguished TCP reliability, ordering, connection establishment, and retransmission from UDP connectionless delivery without those built-in guarantees. | Reinforce through later packet analysis. |
+| Basic subnet calculation | Not tested | Complete subnet calculations were not performed. | Practise `/24`, `/25`, and `/26`. |
 
 ## DNS Status
 
-DNS was not specifically retested during this recovery session.
+DNS was not retested. Its original status remains `Retained`.
 
-The original baseline status remains:
+---
 
-- `Retained`
+# Packet Tracer Validation — 2026-08-09 to 2026-08-10
 
-It should be reviewed later as part of the normal retention cycle rather than treated as a current recovery priority.
+## Topology
 
-## Recovery Summary
+PC1 → Switch → PC2
 
-The recovery session shows substantial improvement compared with the initial baseline from 2026-08-04.
+The laboratory used two hosts connected through a Layer 2 switch with `/24` IPv4 addressing.
 
-### Recovered
+## Successful Test
 
-- IP addressing
-- Subnet masks
-- Local vs remote network decisions
-- Default gateway
-- ARP
-- Switch vs router
-- ICMP and `ping`
-- TCP vs UDP
+Both hosts were initially configured in the same IPv4 network.
 
-### Previously Retained
+The test validated:
 
-- Basic DNS purpose
+- Local-versus-remote network determination using IPv4 addressing and subnet masks.
+- ARP Request and ARP Reply for local IPv4-to-MAC resolution.
+- Layer 2 forwarding through the switch.
+- ICMP Echo Request and Echo Reply using `ping`.
 
-### Not Yet Tested
+## Controlled Failure
 
-- Basic subnet calculation
+PC2 was moved to a different `/24` network while PC1 remained in its original network.
+
+No router or default gateway was configured.
+
+PC1 identified PC2 as a remote destination because the destination IP address did not belong to its local network according to the subnet mask.
+
+Reaching PC2 would therefore require a valid next hop through a default gateway. The host would need to resolve the gateway's MAC address using ARP before sending the Ethernet frame to it.
+
+Because no gateway was configured and no router existed in the topology, there was no valid next hop and communication failed.
+
+## Diagnosis
+
+**Root cause:** the hosts were placed in different IPv4 networks without a Layer 3 device capable of routing traffic between them.
+
+Local communication:
+
+PC1 determines that PC2 is local  
+→ ARP resolves PC2's IPv4 address to its MAC address  
+→ PC1 sends the Ethernet frame toward PC2  
+→ The switch forwards the frame  
+→ Communication proceeds
+
+Remote communication:
+
+PC1 determines that PC2 is remote  
+→ A default gateway is required as the next hop  
+→ ARP would resolve the gateway's IPv4 address to its MAC address  
+→ The Ethernet frame would be sent to the router  
+→ The router would forward the IP packet toward PC2's network
+
+The remote path could not proceed because the topology had no configured gateway or router.
+
+## Validation Results
+
+| Capability | Status |
+|---|---|
+| IPv4 addressing | Practically validated |
+| Subnet-mask application | Practically validated |
+| Local vs remote determination | Practically validated |
+| ARP for local delivery | Practically validated |
+| Layer 2 switch forwarding | Practically validated |
+| ICMP and `ping` | Practically validated |
+| Default gateway | Conceptually recovered; practical validation pending |
+| Router operation | Practical validation pending |
+| TCP vs UDP | Not tested in this laboratory |
+| Basic subnet calculation | Not tested in this laboratory |
 
 ## Current Priority
 
-Complete the Cisco Packet Tracer laboratory to validate the recovered concepts through practical network behaviour.
-
-The laboratory should verify:
-
-- IP addressing
-- Subnet masks
-- Local communication
-- Local-versus-remote destination logic
-- ARP Request and ARP Reply
-- Ethernet frame delivery
-- Switch forwarding
-- ICMP Echo Request and Echo Reply
-- Controlled connectivity failure
-- Diagnosis
-- Correction
-- Final validation
-
-After the Packet Tracer laboratory, practise complete `/24`, `/25`, and `/26` subnet calculations.
+1. Practise complete `/24`, `/25`, and `/26` subnet calculations.
+2. Perform delayed unaided retrieval of the recovered networking concepts.
+3. Build a routed topology to validate default-gateway and router behaviour.
+4. Reproduce the Packet Tracer laboratory without the original guide.
 
 ## Retention Status
 
-The concepts listed as `Recovered` are not yet considered consolidated.
+Recovered and practically validated concepts are not yet considered consolidated.
 
-The next stages are:
-
-1. Practical validation.
-2. Delayed unaided retrieval.
-3. Reproduction without the original guide.
-4. Variant troubleshooting.
-5. Longer-term retention checks.
-
-A concept should only be considered consolidated after it can be retrieved, applied, and troubleshot after a meaningful delay.
+Consolidation requires successful delayed retrieval, independent reproduction, and troubleshooting of a modified scenario.
