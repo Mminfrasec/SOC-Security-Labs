@@ -159,3 +159,100 @@ The remote path could not proceed because the topology had no configured gateway
 Recovered and practically validated concepts are not yet considered consolidated.
 
 Consolidation requires successful delayed retrieval, independent reproduction, and troubleshooting of a modified scenario.
+
+---
+
+# Delayed Retrieval and Subnetting Practice — 2026-08-13
+
+## Conditions
+
+- Retrieval was performed without consulting notes or study material.
+- The session took place approximately four days after the recovery session and three days after completion of the Packet Tracer laboratory.
+- Answers were evaluated according to technical meaning and understanding rather than exact memorization of previous wording.
+- Corrections were reviewed only after completing the unaided attempt.
+- Original baseline, recovery-session, and Packet Tracer results remain unchanged.
+
+## Retrieval Results
+
+| Topic | Status | Evidence | Next Action |
+|---|---|---|---|
+| IP addressing | Delayed retrieval successful | Recalled that IP provides logical addressing and supports packet delivery across local and remote networks. | Reinforce the distinction between the IP protocol and an IP address during later retrieval. |
+| Subnet masks | Delayed retrieval successful | Correctly recalled that the subnet mask identifies the network and host portions of an IPv4 address. | Continue applying subnet masks through subnet calculations. |
+| Local vs remote networks | Delayed retrieval successful | Correctly recalled that devices in the same local network can communicate without a router and that communication with a remote network requires Layer 3 forwarding. | Reinforce with different prefixes and routed networks. |
+| Default gateway | Delayed retrieval successful | Correctly recalled that the default gateway is the router interface used by a host to reach remote networks. | Validate with a routed Packet Tracer topology. |
+| ARP | Delayed retrieval successful | Correctly recalled that ARP resolves an IPv4 address to a MAC address. | Reinforce ARP behaviour when the next hop is the default gateway. |
+| Basic subnet calculation | Practised — partial | Correctly identified subnet masks, network addresses, usable address ranges, and broadcast addresses for `/24`, `/25`, and `/26`. Errors remained in usable-host counts and some requested fields were omitted. | Reinforce usable-host calculations and repeat mixed `/24`, `/25`, and `/26` exercises without guidance. |
+
+## Concepts Not Retested
+
+The following concepts were not independently retested during this session and retain their previous status:
+
+- Switches and routers — `Recovered`
+- ICMP and `ping` — `Recovered`
+- TCP and UDP — `Recovered`
+- DNS — `Retained`
+
+## Subnetting Practice Results
+
+| Exercise | Network | Mask | First Usable | Last Usable | Broadcast | Usable Hosts | Result |
+|---|---|---|---|---|---|---:|---|
+| A — `192.168.10.0/24` | `192.168.10.0` | `255.255.255.0` | `192.168.10.1` | Omitted | `192.168.10.255` | 254 | Correct except for one omitted field |
+| B — `192.168.10.0/25` | `192.168.10.0` | `255.255.255.128` | `192.168.10.1` | `192.168.10.126` | `192.168.10.127` | 127 | Host count incorrect; correct value is 126 |
+| C — `192.168.10.128/25` | `192.168.10.128` | `255.255.255.128` | `192.168.10.129` | `192.168.10.254` | `192.168.10.255` | 127 | Host count incorrect; correct value is 126 |
+| D — `192.168.10.64/26` | `192.168.10.64` | `255.255.255.192` | `192.168.10.65` | `192.168.10.126` | `192.168.10.127` | Omitted | Correct addressing; correct host count is 62 |
+| E — `192.168.10.192/26` | `192.168.10.192` | `255.255.255.192` | `192.168.10.193` | `192.168.10.254` | `192.168.10.255` | Omitted | Correct addressing; correct host count is 62 |
+
+## Observed Gap
+
+The main subnetting gap is currently the calculation of usable host addresses rather than identification of subnet boundaries.
+
+For the prefixes tested:
+
+| Prefix | Total Addresses | Usable Hosts |
+|---|---:|---:|
+| `/24` | 256 | 254 |
+| `/25` | 128 | 126 |
+| `/26` | 64 | 62 |
+
+General rule:
+
+```text
+Host bits = 32 - prefix length
+Total addresses = 2^(host bits)
+Usable hosts = Total addresses - 2
+```
+
+## Current Priority
+
+1. Reinforce the distinction between total addresses and usable host addresses.
+2. Repeat mixed `/24`, `/25`, and `/26` calculations without guidance.
+3. Provide all six fields consistently:
+   - Network address
+   - Subnet mask
+   - First usable host
+   - Last usable host
+   - Broadcast address
+   - Usable host count
+4. Build a routed Packet Tracer topology to validate default-gateway and router behaviour.
+5. Introduce a controlled gateway or routing failure and diagnose it.
+6. Reproduce the networking laboratory without the original guide.
+
+## Retention Status
+
+The concepts retested on 2026-08-13 remained accessible approximately four days after the 2026-08-09 recovery session.
+
+This provides evidence of delayed retention but does not yet qualify the competencies as consolidated.
+
+Current status:
+
+```text
+Networking fundamentals: Recovered
+Subnetting: Practised — partial
+Routed practical validation: Pending
+Independent reproduction: Pending
+Consolidation: Pending
+```
+
+Successful retrieval does not require reproducing previous documentation word for word.
+
+The objective is to reconstruct the technical model accurately, explain it independently, and apply it to practical networking problems.
