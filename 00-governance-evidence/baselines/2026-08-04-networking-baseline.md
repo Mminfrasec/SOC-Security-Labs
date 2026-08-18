@@ -259,6 +259,138 @@ The objective is to reconstruct the technical model accurately, explain it indep
 
 ---
 
+# Subnetting Follow-up and Routed Packet Tracer Validation — 2026-08-17
+
+## Conditions
+
+- Previous baseline and validation results remain unchanged.
+- Subnetting exercises were completed as follow-up practice after the partial result recorded on 2026-08-13.
+- The routed Packet Tracer topology was built and configured with step-by-step guidance.
+- Successful local-gateway and end-to-end routed connectivity were observed.
+- Independent reproduction was not performed during this session.
+- Completion of the controlled default-gateway failure was not presented as evidence and therefore remains pending.
+- These results demonstrate guided practice and validation, not consolidation or autonomous execution.
+
+## Subnetting Follow-up Results
+
+| Exercise | Network | Mask | First Usable | Last Usable | Broadcast | Usable Hosts | Total Addresses | Result |
+|---|---|---|---|---|---|---:|---:|---|
+| A — `192.168.30.77/24` | `192.168.30.0` | `255.255.255.0` | `192.168.30.1` | `192.168.30.254` | `192.168.30.255` | 254 | 256 | Correct |
+| B — `192.168.30.140/25` | `192.168.30.128` | `255.255.255.128` | `192.168.30.129` | `192.168.30.254` | `192.168.30.255` | 126 | 128 | Correct |
+| C — `192.168.30.70/26` | `192.168.30.64` | `255.255.255.64` | `192.168.30.65` | `192.168.30.126` | `192.168.30.127` | 62 | 64 | Incorrect mask; correct mask is `255.255.255.192` |
+| D — `192.168.50.150/26` | `192.168.50.128` | `255.255.255.192` | `192.168.50.129` | `192.168.50.190` | `192.168.50.191` | 62 | 64 | Correct |
+
+## Subnetting Assessment
+
+The previous gap involving the distinction between total addresses and usable host addresses was corrected across the follow-up exercises.
+
+Exercise C revealed a temporary confusion between the `/26` subnet mask and its block size:
+
+```text
+/26 subnet mask: 255.255.255.192
+Block size:       64
+```
+
+Exercise D was subsequently completed with all requested fields correct, including the `/26` mask, network address, usable range, broadcast address, usable-host count, and total-address count.
+
+Current status:
+
+```text
+Basic subnet calculation: Practised — follow-up successful
+Independent reproduction: Not yet demonstrated
+Consolidation: Pending
+```
+
+## Routed Packet Tracer Topology
+
+```text
+PC1
+→ Switch0
+→ Router 1941
+→ Switch3
+→ PC2
+```
+
+Two separate `/24` IPv4 networks were connected through a Cisco 1941 router.
+
+## Addressing Plan
+
+| Device | Interface | IPv4 Address | Subnet Mask | Default Gateway |
+|---|---|---|---|---|
+| PC1 | `FastEthernet0` | `192.168.10.10` | `255.255.255.0` | `192.168.10.1` |
+| Router 1941 | `GigabitEthernet0/0` | `192.168.10.1` | `255.255.255.0` | Not applicable |
+| Router 1941 | `GigabitEthernet0/1` | `192.168.20.1` | `255.255.255.0` | Not applicable |
+| PC2 | `FastEthernet0` | `192.168.20.10` | `255.255.255.0` | `192.168.20.1` |
+
+## Successful Connectivity Evidence
+
+The physical links were operational and displayed as active in Packet Tracer.
+
+The following tests were observed from PC1:
+
+| Test | Result |
+|---|---|
+| `ping 192.168.10.1` | Successful — 4 replies and 0% packet loss |
+| `ping 192.168.20.10` | Successful — 4 replies and 0% packet loss |
+
+The successful remote ping demonstrated that the guided configuration supported end-to-end communication between `192.168.10.0/24` and `192.168.20.0/24`.
+
+This required:
+
+- PC1 to identify PC2 as a remote destination.
+- PC1 to send the packet through its default gateway, `192.168.10.1`.
+- The router to forward the packet from `GigabitEthernet0/0` to `GigabitEthernet0/1`.
+- PC2 to use `192.168.20.1` as the return-path gateway.
+- ICMP Echo Request and Echo Reply traffic to cross the router successfully.
+
+## Validation Results
+
+| Capability | Status | Evidence | Next Action |
+|---|---|---|---|
+| `/24`, `/25`, and `/26` subnet calculation | Practised — follow-up successful | Final follow-up exercise was completed with all requested fields correct. | Retest after a delay using different addresses. |
+| Total versus usable addresses | Practised — follow-up successful | Correctly calculated 256/254, 128/126, and 64/62. | Reinforce through delayed retrieval. |
+| Subnet mask versus block size | Corrected after feedback | A `/26` mask was initially confused with the block size, followed by a completely correct `/26` exercise. | Retest without guidance. |
+| Router interface configuration | Practically validated — guided | Both router interfaces supported successful routed communication. | Reproduce without the original commands. |
+| Default gateway | Practically validated — guided | Successful communication between different IPv4 networks required valid gateways on both hosts. | Introduce and diagnose a controlled gateway failure. |
+| Router forwarding | Practically validated — guided | PC1 successfully reached PC2 across two directly connected router interfaces. | Reproduce in a new topology without guidance. |
+| ICMP and `ping` | Practically validated — guided | Successful ICMP replies were observed across the routed topology. | Retest during independent reproduction. |
+| ARP toward the default gateway | Not directly observed | Routed communication occurred, but gateway ARP behaviour was not inspected directly in Simulation Mode. | Observe ARP traffic in a later Packet Tracer session. |
+| Controlled default-gateway failure | Pending evidence | No completed failure, diagnosis, correction, and final validation were presented. | Execute the complete troubleshooting cycle. |
+| Independent reproduction | Pending | The topology was completed with guidance. | Rebuild the laboratory in a new Packet Tracer file without the guide. |
+| Consolidation | Pending | Delayed independent reproduction has not yet been demonstrated. | Continue spaced retrieval and practical reproduction. |
+
+## Current Priority
+
+1. Rebuild the routed topology in a new Packet Tracer file without consulting the original guide.
+2. Choose two different private `/24` networks and create a valid addressing plan.
+3. Configure the topology, router interfaces, hosts, and default gateways.
+4. Validate local-gateway and end-to-end connectivity.
+5. Introduce one incorrect default gateway.
+6. Diagnose the failure before changing any configuration.
+7. Correct the root cause and validate connectivity again.
+8. Record every type of assistance required:
+   - Syntax help
+   - Addressing help
+   - Cabling or interface help
+   - Troubleshooting help
+9. Perform later delayed retrieval of networking concepts and subnetting.
+
+## Retention Status
+
+```text
+Networking fundamentals: Recovered with delayed retrieval evidence
+Subnetting: Practised — follow-up successful
+Routed connectivity: Practically validated — guided
+Default gateway: Practically validated — guided
+Controlled gateway failure: Pending evidence
+Independent reproduction: Pending
+Consolidation: Pending
+```
+
+The guided routed validation confirms that the designed topology can operate correctly. It does not yet demonstrate that the same result can be reproduced or diagnosed independently.
+
+---
+
 # Routed Packet Tracer Validation and Independent Reproduction — 2026-08-18
 
 ## Conditions
