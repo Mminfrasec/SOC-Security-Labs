@@ -256,3 +256,156 @@ Consolidation: Pending
 Successful retrieval does not require reproducing previous documentation word for word.
 
 The objective is to reconstruct the technical model accurately, explain it independently, and apply it to practical networking problems.
+
+---
+
+# Routed Packet Tracer Validation and Independent Reproduction — 2026-08-18
+
+## Conditions
+
+- The routed topology was built and tested in Cisco Packet Tracer.
+- The complete laboratory was subsequently reproduced without following the original laboratory guide.
+- The required router configuration procedure was remembered conceptually.
+- Exact Cisco IOS router command syntax required reference during reproduction.
+- The original baseline and previous recovery records remain unchanged.
+
+## Topology
+
+```text
+PC1 → Switch → Router → Switch → PC2
+```
+
+Two different IPv4 networks were connected through a router.
+
+## Routed Connectivity Validation
+
+The laboratory demonstrated successful communication between hosts located in different IPv4 networks.
+
+Validation included:
+
+- Reachability from each host to its local router interface.
+- Reachability across the router toward the remote network.
+- End-to-end ICMP connectivity between the two hosts.
+- Correct use of host default gateways.
+- Correct Layer 3 forwarding by the router.
+
+Observed successful tests included zero packet loss when the routed configuration was correct.
+
+## Controlled Default-Gateway Failure
+
+An incorrect default gateway was introduced deliberately.
+
+During the failure:
+
+- Local connectivity within PC2's network remained available.
+- PC2 could still reach its local router interface.
+- Remote destinations became unreachable.
+- ICMP tests toward the remote network returned timeouts and 100% packet loss.
+
+The difference between successful local communication and failed remote communication was used as troubleshooting evidence.
+
+## Diagnosis
+
+The observed behaviour was consistent with a default-gateway configuration problem:
+
+```text
+Local destination
+→ reachable
+
+Remote destination
+→ unreachable
+```
+
+The host could communicate locally but could not correctly forward traffic toward remote IPv4 networks.
+
+The gateway configuration was inspected and corrected.
+
+## Resolution and Validation
+
+After restoring the correct default gateway:
+
+- Remote ICMP connectivity was restored.
+- The previously unreachable remote host responded successfully.
+- The final validation showed successful packet delivery with zero packet loss.
+
+## Independent Reproduction
+
+The complete routed laboratory was reproduced without following the original guide.
+
+The following technical decisions and procedures were remembered independently:
+
+- Build two different IPv4 networks.
+- Connect each network through a switch to a router.
+- Assign host IPv4 addresses and subnet masks.
+- Configure a default gateway for each host.
+- Assign an IPv4 address and subnet mask to each router interface.
+- Activate the router interfaces.
+- Validate local gateway connectivity.
+- Validate routed end-to-end connectivity.
+- Introduce and diagnose a gateway failure.
+- Restore the correct configuration and validate recovery.
+
+The remaining dependency was the exact Cisco IOS syntax required to implement the router configuration.
+
+## Cisco IOS Retrieval Gap
+
+The conceptual configuration sequence was remembered:
+
+```text
+Enter privileged mode
+→ Enter global configuration mode
+→ Select router interface
+→ Assign IPv4 address and subnet mask
+→ Enable interface
+→ Repeat for the second interface
+→ Verify interface status
+```
+
+However, the exact syntax of commands such as the following was not fully retrieved without reference:
+
+```text
+enable
+configure terminal
+interface gigabitEthernet 0/0
+ip address ...
+no shutdown
+exit
+end
+show ip interface brief
+```
+
+This represents a command-syntax retrieval gap rather than a demonstrated failure to understand the routing configuration process.
+
+## Evidence Update
+
+| Capability | Result |
+|---|---|
+| Mixed `/24`, `/25`, `/26` subnetting | Practised successfully |
+| Usable-host calculation | Corrected and successfully retested |
+| Default-gateway operation | Practically validated |
+| Router forwarding | Practically validated |
+| Routed end-to-end communication | Practically validated |
+| Controlled incorrect-gateway failure | Completed |
+| Layer 3 troubleshooting | Completed for the controlled failure |
+| Resolution and final validation | Completed |
+| Independent routed-lab reproduction | Completed with minor Cisco IOS syntax reference |
+| Exact Cisco IOS syntax retrieval | Weak |
+| Gateway ARP observation | Not explicitly documented |
+| Long-term consolidation | Pending |
+
+## Next Action
+
+- Do not repeat the complete routed laboratory immediately.
+- Retest Cisco IOS interface-configuration syntax in a short later retrieval session.
+- Maintain networking through delayed retrieval.
+- Retest subnetting after a delay.
+- Observe gateway ARP behaviour explicitly during a later networking session.
+- Use a modified or unknown Layer 3 fault in a future troubleshooting exercise.
+
+## Retention Status
+
+The new evidence raises routed networking from practical-validation pending to successfully validated and independently reproduced with a minor syntax dependency.
+
+It does not justify `Consolidated`.
+
+Consolidation remains pending until the knowledge is retrieved successfully after a longer delay and applied to modified troubleshooting scenarios.
