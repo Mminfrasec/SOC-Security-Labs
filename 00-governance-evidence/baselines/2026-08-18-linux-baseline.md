@@ -161,3 +161,242 @@ The following errors exposed unresolved gaps:
 4. Practise `ls -la`, `mkdir`, `touch`, `cp`, `mv`, `cat`, and `less` in a safe directory.
 5. Do not classify navigation as independently reproduced until the retest succeeds without guidance.
 6. Continue afterward with users, groups, ownership, and permissions.
+
+---
+
+## Practical Evidence — 2026-08-20
+
+This section records later study and practical evidence without changing the original unaided baseline results from `2026-08-18` or the guided evidence already recorded for that date.
+
+### Conditions
+
+- The initial retrieval attempt was completed before studying the filesystem and navigation block.
+- Filesystem hierarchy, paths, navigation, and basic file operations were then studied with step-by-step guidance.
+- The filesystem laboratory was completed inside `/home/student/linux-lab`.
+- Terminal output was captured in a photograph.
+- The final conceptual retrieval was completed without consulting notes.
+- `cd ~`, `cd linux-lab`, and `pwd` were recalled and executed immediately without consulting the guide.
+- `ls -la` required consultation of the guide and was then executed correctly.
+- This session was not a delayed retrieval test or an independent reproduction of the complete laboratory.
+
+### Initial Retrieval Before Study
+
+The initial attempt showed partial recovery and several unresolved gaps:
+
+- `/` was correctly identified as the filesystem root and as the separator between path components.
+- A filesystem was incorrectly described as a system file.
+- `/home`, `/var`, and `/tmp` were explained at a basic level.
+- `/etc` was incorrectly described as containing system files and programs rather than primarily system and service configuration.
+- The distinction between a file and a directory was incomplete.
+- An absolute path was associated with being long or complete rather than being interpreted from `/`.
+- A relative path was associated with being short rather than being interpreted from the current working directory.
+- `.`, `..`, and `~` were not recalled.
+
+After correction:
+
+- `/tmp` was recognised as an absolute path because it begins at `/` and is interpreted from the filesystem root.
+- `..` was correctly associated with the parent directory.
+- `cd ~` was correctly associated with returning to the current user’s home directory.
+- The difference between `/etc` and `/var` remained imprecise and required further correction.
+
+### Guided Filesystem Practice
+
+The supplied terminal evidence showed the following successful sequence:
+
+```bash
+pwd
+cd ~
+pwd
+mkdir linux-lab
+ls
+cd linux-lab
+pwd
+mkdir documents
+mkdir backups
+ls
+touch notes.txt
+ls -la
+cp notes.txt backups/notes-copy.txt
+ls
+ls backups
+mv notes.txt documents/
+ls
+ls documents
+ls backups
+ls
+```
+
+The working paths and final structure were verified as:
+
+```text
+/home/student
+/home/student/linux-lab
+
+/home/student/linux-lab/
+├── backups/
+│   └── notes-copy.txt
+└── documents/
+    └── notes.txt
+```
+
+The terminal evidence demonstrated successful guided execution of:
+
+- `pwd`
+- `cd`
+- `cd ~`
+- `ls`
+- `ls -la`
+- `mkdir`
+- `touch`
+- `cp`
+- `mv`
+
+The following results were verified:
+
+- `linux-lab` was created inside `/home/student`.
+- `documents` and `backups` were created inside `linux-lab`.
+- `notes.txt` was created in `linux-lab`.
+- `cp notes.txt backups/notes-copy.txt` preserved the original and created the copy.
+- `mv notes.txt documents/` removed the original from `linux-lab` and placed it inside `documents`.
+- `ls documents` showed `notes.txt`.
+- `ls backups` showed `notes-copy.txt`.
+- No command error was visible in the supplied terminal evidence.
+
+The explanation of the `cp` command initially identified the copy operation but used `/backups` imprecisely instead of the relative path `backups/notes-copy.txt`.
+
+The explanation of the `mv` command correctly identified that `notes.txt` was moved from `linux-lab` into `documents`.
+
+The exact source and destination arguments initially required correction:
+
+```text
+cp notes.txt backups/notes-copy.txt
+
+Current working directory:
+  /home/student/linux-lab
+
+Relative source:
+  notes.txt
+
+Relative destination:
+  backups/notes-copy.txt
+```
+
+```text
+mv notes.txt documents/
+
+Current working directory:
+  /home/student/linux-lab
+
+Relative source:
+  notes.txt
+
+Relative destination:
+  documents/
+```
+
+The distinction between the following paths was recognised at a classification level, but the exact resolved locations required correction:
+
+```text
+documents/notes.txt
+→ relative path
+→ /home/student/linux-lab/documents/notes.txt
+```
+
+```text
+/documents/notes.txt
+→ absolute path
+→ /documents/notes.txt
+```
+
+### Final Immediate Retrieval Without Notes
+
+The following concepts were recalled correctly or at a sufficient basic level:
+
+- `/` represents the filesystem root.
+- `/` also separates components inside a path.
+- `/home` normally contains users’ home directories.
+- `/tmp` is used for temporary data.
+- `/var` contains data that changes during system operation, although the explanation remained general.
+- An absolute path begins at `/` and is interpreted from the filesystem root.
+- A relative path is interpreted from the current working directory.
+- `pwd` shows the current working directory.
+- `ls` lists directory contents.
+- `cd` changes the current working directory.
+- `mkdir` creates a directory.
+- `touch` creates an empty file when the file does not already exist.
+- `cat` displays file content directly.
+- `less` allows navigation through longer file content.
+
+The following precision gaps remained:
+
+- `/etc` was still described too generally as containing system and service files instead of primarily system and service configuration.
+- The current working directory was confused with the `pwd` command that displays it.
+- `.` was described as returning to the current directory instead of representing the current directory.
+- `..` was described as performing movement instead of representing the parent directory.
+- `~` was described as performing movement instead of representing the current user’s home directory.
+- The distinction between `.`, `..`, and `~` and the commands `cd .`, `cd ..`, and `cd ~` remained imprecise.
+- `ls -la` was correctly associated with hidden entries and executed successfully after consulting the guide, but its syntax was not retrieved independently and the detailed-listing purpose of `-l` was not initially stated.
+- `cp` was described as copying files or directories without recalling that recursive directory copying normally requires `-r`.
+- `mv` was recalled as moving files or directories, but its renaming function was not initially stated.
+- The filesystem concept itself was incorrect during the initial retrieval and was not independently re-explained during the final retrieval.
+- Independent execution of `cat` and `less` was not evidenced in the supplied terminal record.
+
+### Immediate Retrieval With One Syntax Reference
+
+The following commands were recalled and executed without consulting the guide immediately after study:
+
+```bash
+cd ~
+cd linux-lab
+pwd
+```
+
+The following command required consultation of the guide and was then executed successfully:
+
+```bash
+ls -la
+```
+
+This demonstrates successful immediate unaided retrieval and execution of the limited navigation sequence through `pwd`.
+
+It also demonstrates successful reference-assisted execution of `ls -la`.
+
+It does not demonstrate:
+
+- Unaided retrieval of `ls -la`.
+- Delayed retention.
+- Independent reproduction of directory and file creation.
+- Independent reproduction of copying or moving.
+- Independent use of `cat` or `less`.
+- Recovery of the complete filesystem model.
+- Consolidation.
+
+### Updated Assessment After Guided Practice
+
+| Topic                                        | Updated Status                                     | Evidence and Limitation                                                                                                                                                       |
+| -------------------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Filesystem root `/`                          | Immediate retrieval successful                     | Correctly recalled as the filesystem root and as a path separator. Delayed retention remains untested.                                                                        |
+| Main filesystem directories                  | Immediate retrieval — partial                      | `/home`, `/var`, and `/tmp` were explained at a basic level. `/etc` remained imprecise, and the filesystem concept itself was not independently re-explained correctly.       |
+| Current working directory and `pwd`          | Immediate retrieval — weak                         | Correctly recalled that `pwd` shows the current location, but the directory itself was confused with the command that displays it.                                            |
+| Absolute and relative paths                  | Guided practice and immediate retrieval — partial  | The basic distinction was recalled, but exact path resolution and the difference between `backups/` and `/backups/` required correction.                                      |
+| `.`, `..`, and `~`                           | Immediate retrieval — partial                      | Their associated locations were recalled, but they were described as performing navigation rather than representing paths or locations used with commands such as `cd`.      |
+| Basic navigation                             | Guided practice completed; limited immediate retrieval | `cd ~`, `cd linux-lab`, and `pwd` were recalled and executed without the guide. `ls -la` required consultation and was then executed correctly. Delayed retesting remains pending. |
+| File and directory creation                  | Guided practice completed                          | `mkdir` and `touch` were executed successfully inside a controlled laboratory. Independent reproduction remains pending.                                                     |
+| File copying and moving                      | Guided practice completed; explanation still weak  | `cp` and `mv` produced the expected results, but exact source and destination paths initially required correction. Recursive copying and renaming remain untested.             |
+| `cat` and `less`                             | Basic purpose recalled; practical evidence limited | Their basic purposes were explained, but independent execution was not evidenced in the supplied terminal record.                                                            |
+| Complete independent filesystem reproduction | Not tested                                         | The complete laboratory was not reproduced without the original guide.                                                                                                       |
+| Delayed retention                            | Not tested                                         | The final retrieval occurred immediately after study.                                                                                                                        |
+| Consolidation                                | Pending                                            | Guided success and immediate retrieval do not demonstrate consolidation.                                                                                                     |
+
+### Next Evidence Required
+
+1. Perform a delayed retrieval without reviewing the original explanations first.
+2. Explain the filesystem concept independently.
+3. Explain the precise purposes of `/home`, `/etc`, `/var`, and `/tmp`.
+4. Distinguish the current working directory from the `pwd` command.
+5. Explain `.`, `..`, and `~` as locations before explaining their use with `cd`.
+6. Resolve absolute and relative paths from different stated working directories.
+7. Retest `cd ~`, `cd linux-lab`, `pwd`, and `ls -la` without guidance.
+8. Continue with users, groups, UID, GID, `root`, and `sudo` as scheduled.
+9. Reproduce the complete filesystem and permissions laboratory later without the original guide.
+10. Do not classify the filesystem block as `Recovered`, `Reproduced`, or `Consolidated` until delayed and independent evidence supports those states.
