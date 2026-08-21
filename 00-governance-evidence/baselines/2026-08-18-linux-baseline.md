@@ -14,22 +14,22 @@ Assess my current ability to retrieve and explain previously studied Linux funda
 
 ## Results
 
-| Topic | Status | Observed Gap | Next Action |
-|---|---|---|---|
-| Files and directories | Weak | Correctly distinguished a file from a directory at a basic level, but the explanation was limited and did not include filesystem behaviour or directory structure. | Reinforce the purpose of files and directories and practise creating, listing, navigating, copying, moving, and reading them. |
-| Linux filesystem structure | Forgotten | Could not explain the Linux filesystem hierarchy, the meaning of `/`, or the purpose of directories such as `/home`, `/etc`, `/var`, and `/tmp`. `/` was incorrectly associated mainly with separation between directories rather than the filesystem root. | Rebuild the Linux filesystem hierarchy starting with `/` and the purpose of the main system directories. |
-| Users and groups | Weak | Remembered the basic idea of a user but could not explain groups or their relationship to permissions and access control. | Review users, primary and secondary groups, UID, GID, and the relationship between identity and access. |
-| Ownership | Forgotten | Could not explain file or directory ownership or the owner/group relationship. | Review owner and group ownership and inspect them using `ls -l`. |
-| Permissions | Forgotten | Could not explain permission categories or the meaning of `r`, `w`, and `x`. | Learn owner, group, and others permissions and distinguish their behaviour on files and directories. |
-| `chmod` and `chown` | Forgotten | Could not recall the purpose of either command. | Practise using `chmod` to modify permissions and `chown` to modify ownership in a controlled laboratory. |
-| Processes | Forgotten | Could not explain what a process is. | Learn the basic process model and later practise identifying running processes. |
-| Services and `systemctl` | Forgotten | Could not explain services and did not recall the purpose or use of `systemctl`. | Learn the relationship between services and processes and practise basic service inspection and control with `systemctl`. |
-| Logs and `journalctl` | Forgotten | Confused a system log with a user login/session and could not recall where Linux logs are stored or how `journalctl` is used. | Rebuild the concept of system logging, review `/var/log`, and later practise inspecting journal entries with `journalctl`. |
-| Network configuration | Forgotten | Could not recall how to inspect Linux IP or network-interface configuration. | Learn and practise basic Linux network inspection commands after core filesystem and permission fundamentals are recovered. |
-| Connectivity testing | Retained | Correctly recalled that `ping` can be used with an IPv4 address to test network reachability. | Maintain through practical use and later reinforce the limitations of `ping`. |
-| `sudo` and root | Weak | Remembered that `sudo` is related to elevated privileges but confused the command with the privileged account itself and could not explain the `root` user. | Distinguish a normal user, the `root` account, and temporary command execution with elevated privileges through `sudo`. |
-| Package management | Forgotten | Could not recall package-management concepts or commands. | Introduce package installation, update, removal, and package information after the initial filesystem and permission block. |
-| Backup and recovery | Retained | Correctly recalled the basic distinction between preserving copies of files or configurations and recovering them when required. | Reinforce through later practical backup and restore exercises. |
+| Topic                      | Status    | Observed Gap                                                                                                                                                                                                                                                | Next Action                                                                                                                   |
+| -------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Files and directories      | Weak      | Correctly distinguished a file from a directory at a basic level, but the explanation was limited and did not include filesystem behaviour or directory structure.                                                                                          | Reinforce the purpose of files and directories and practise creating, listing, navigating, copying, moving, and reading them. |
+| Linux filesystem structure | Forgotten | Could not explain the Linux filesystem hierarchy, the meaning of `/`, or the purpose of directories such as `/home`, `/etc`, `/var`, and `/tmp`. `/` was incorrectly associated mainly with separation between directories rather than the filesystem root. | Rebuild the Linux filesystem hierarchy starting with `/` and the purpose of the main system directories.                      |
+| Users and groups           | Weak      | Remembered the basic idea of a user but could not explain groups or their relationship to permissions and access control.                                                                                                                                   | Review users, primary and secondary groups, UID, GID, and the relationship between identity and access.                       |
+| Ownership                  | Forgotten | Could not explain file or directory ownership or the owner/group relationship.                                                                                                                                                                              | Review owner and group ownership and inspect them using `ls -l`.                                                              |
+| Permissions                | Forgotten | Could not explain permission categories or the meaning of `r`, `w`, and `x`.                                                                                                                                                                                | Learn owner, group, and others permissions and distinguish their behaviour on files and directories.                          |
+| `chmod` and `chown`        | Forgotten | Could not recall the purpose of either command.                                                                                                                                                                                                             | Practise using `chmod` to modify permissions and `chown` to modify ownership in a controlled laboratory.                      |
+| Processes                  | Forgotten | Could not explain what a process is.                                                                                                                                                                                                                        | Learn the basic process model and later practise identifying running processes.                                               |
+| Services and `systemctl`   | Forgotten | Could not explain services and did not recall the purpose or use of `systemctl`.                                                                                                                                                                            | Learn the relationship between services and processes and practise basic service inspection and control with `systemctl`.     |
+| Logs and `journalctl`      | Forgotten | Confused a system log with a user login/session and could not recall where Linux logs are stored or how `journalctl` is used.                                                                                                                               | Rebuild the concept of system logging, review `/var/log`, and later practise inspecting journal entries with `journalctl`.    |
+| Network configuration      | Forgotten | Could not recall how to inspect Linux IP or network-interface configuration.                                                                                                                                                                                | Learn and practise basic Linux network inspection commands after core filesystem and permission fundamentals are recovered.   |
+| Connectivity testing       | Retained  | Correctly recalled that `ping` can be used with an IPv4 address to test network reachability.                                                                                                                                                               | Maintain through practical use and later reinforce the limitations of `ping`.                                                 |
+| `sudo` and root            | Weak      | Remembered that `sudo` is related to elevated privileges but confused the command with the privileged account itself and could not explain the `root` user.                                                                                                 | Distinguish a normal user, the `root` account, and temporary command execution with elevated privileges through `sudo`.       |
+| Package management         | Forgotten | Could not recall package-management concepts or commands.                                                                                                                                                                                                   | Introduce package installation, update, removal, and package information after the initial filesystem and permission block.   |
+| Backup and recovery        | Retained  | Correctly recalled the basic distinction between preserving copies of files or configurations and recovering them when required.                                                                                                                            | Reinforce through later practical backup and restore exercises.                                                               |
 
 ## Retained Knowledge
 
@@ -142,16 +142,16 @@ The following errors exposed unresolved gaps:
 
 ### Updated Assessment After Guided Practice
 
-| Topic | Updated Status | Evidence and Limitation |
-|---|---|---|
-| Basic navigation with `pwd`, `ls`, and `cd` | Guided practice — partial | Successful execution was observed across several directories, but path errors show that the mental model is not yet reliable. |
-| Absolute and relative paths | Guided practice — weak | Valid absolute and relative paths were used, but root-relative paths, case sensitivity, and current-directory context caused repeated errors. |
-| Linux filesystem structure | Partial practical exposure | `/`, `/home`, `/etc`, and `/var` were visited, but their purposes were not independently explained or retested. |
-| Files and directories | Partial practical exposure | Directory contents were listed, but `mkdir`, `touch`, `cp`, `mv`, `cat`, `less`, and `ls -la` were not practised in this session. |
-| `sudo` and root | Guided use only — concept remains weak | Commands were executed with `sudo`, but the distinction between the normal user, `root`, and temporary elevation was not independently explained. |
-| Package management | Guided use only | Update and upgrade commands were executed, but the difference between them required correction and was not independently retested. |
-| Services and `systemctl` | Single guided status check only | `open-vm-tools` was confirmed active, but service concepts and broader `systemctl` use remain unverified. |
-| Troubleshooting | Guided remediation completed | The stale CD-ROM source was located and disabled, but the diagnosis and correction were not performed independently. |
+| Topic                                       | Updated Status                         | Evidence and Limitation                                                                                                                           |
+| ------------------------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Basic navigation with `pwd`, `ls`, and `cd` | Guided practice — partial              | Successful execution was observed across several directories, but path errors show that the mental model is not yet reliable.                     |
+| Absolute and relative paths                 | Guided practice — weak                 | Valid absolute and relative paths were used, but root-relative paths, case sensitivity, and current-directory context caused repeated errors.     |
+| Linux filesystem structure                  | Partial practical exposure             | `/`, `/home`, `/etc`, and `/var` were visited, but their purposes were not independently explained or retested.                                   |
+| Files and directories                       | Partial practical exposure             | Directory contents were listed, but `mkdir`, `touch`, `cp`, `mv`, `cat`, `less`, and `ls -la` were not practised in this session.                 |
+| `sudo` and root                             | Guided use only — concept remains weak | Commands were executed with `sudo`, but the distinction between the normal user, `root`, and temporary elevation was not independently explained. |
+| Package management                          | Guided use only                        | Update and upgrade commands were executed, but the difference between them required correction and was not independently retested.                |
+| Services and `systemctl`                    | Single guided status check only        | `open-vm-tools` was confirmed active, but service concepts and broader `systemctl` use remain unverified.                                         |
+| Troubleshooting                             | Guided remediation completed           | The stale CD-ROM source was located and disabled, but the diagnosis and correction were not performed independently.                              |
 
 ### Next Evidence Required
 
@@ -373,20 +373,20 @@ It does not demonstrate:
 
 ### Updated Assessment After Guided Practice
 
-| Topic                                        | Updated Status                                     | Evidence and Limitation                                                                                                                                                       |
-| -------------------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Filesystem root `/`                          | Immediate retrieval successful                     | Correctly recalled as the filesystem root and as a path separator. Delayed retention remains untested.                                                                        |
-| Main filesystem directories                  | Immediate retrieval — partial                      | `/home`, `/var`, and `/tmp` were explained at a basic level. `/etc` remained imprecise, and the filesystem concept itself was not independently re-explained correctly.       |
-| Current working directory and `pwd`          | Immediate retrieval — weak                         | Correctly recalled that `pwd` shows the current location, but the directory itself was confused with the command that displays it.                                            |
-| Absolute and relative paths                  | Guided practice and immediate retrieval — partial  | The basic distinction was recalled, but exact path resolution and the difference between `backups/` and `/backups/` required correction.                                      |
-| `.`, `..`, and `~`                           | Immediate retrieval — partial                      | Their associated locations were recalled, but they were described as performing navigation rather than representing paths or locations used with commands such as `cd`.      |
+| Topic                                        | Updated Status                                         | Evidence and Limitation                                                                                                                                                            |
+| -------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Filesystem root `/`                          | Immediate retrieval successful                         | Correctly recalled as the filesystem root and as a path separator. Delayed retention remains untested.                                                                             |
+| Main filesystem directories                  | Immediate retrieval — partial                          | `/home`, `/var`, and `/tmp` were explained at a basic level. `/etc` remained imprecise, and the filesystem concept itself was not independently re-explained correctly.            |
+| Current working directory and `pwd`          | Immediate retrieval — weak                             | Correctly recalled that `pwd` shows the current location, but the directory itself was confused with the command that displays it.                                                 |
+| Absolute and relative paths                  | Guided practice and immediate retrieval — partial      | The basic distinction was recalled, but exact path resolution and the difference between `backups/` and `/backups/` required correction.                                           |
+| `.`, `..`, and `~`                           | Immediate retrieval — partial                          | Their associated locations were recalled, but they were described as performing navigation rather than representing paths or locations used with commands such as `cd`.            |
 | Basic navigation                             | Guided practice completed; limited immediate retrieval | `cd ~`, `cd linux-lab`, and `pwd` were recalled and executed without the guide. `ls -la` required consultation and was then executed correctly. Delayed retesting remains pending. |
-| File and directory creation                  | Guided practice completed                          | `mkdir` and `touch` were executed successfully inside a controlled laboratory. Independent reproduction remains pending.                                                     |
-| File copying and moving                      | Guided practice completed; explanation still weak  | `cp` and `mv` produced the expected results, but exact source and destination paths initially required correction. Recursive copying and renaming remain untested.             |
-| `cat` and `less`                             | Basic purpose recalled; practical evidence limited | Their basic purposes were explained, but independent execution was not evidenced in the supplied terminal record.                                                            |
-| Complete independent filesystem reproduction | Not tested                                         | The complete laboratory was not reproduced without the original guide.                                                                                                       |
-| Delayed retention                            | Not tested                                         | The final retrieval occurred immediately after study.                                                                                                                        |
-| Consolidation                                | Pending                                            | Guided success and immediate retrieval do not demonstrate consolidation.                                                                                                     |
+| File and directory creation                  | Guided practice completed                              | `mkdir` and `touch` were executed successfully inside a controlled laboratory. Independent reproduction remains pending.                                                           |
+| File copying and moving                      | Guided practice completed; explanation still weak      | `cp` and `mv` produced the expected results, but exact source and destination paths initially required correction. Recursive copying and renaming remain untested.                 |
+| `cat` and `less`                             | Basic purpose recalled; practical evidence limited     | Their basic purposes were explained, but independent execution was not evidenced in the supplied terminal record.                                                                  |
+| Complete independent filesystem reproduction | Not tested                                             | The complete laboratory was not reproduced without the original guide.                                                                                                             |
+| Delayed retention                            | Not tested                                             | The final retrieval occurred immediately after study.                                                                                                                              |
+| Consolidation                                | Pending                                                | Guided success and immediate retrieval do not demonstrate consolidation.                                                                                                           |
 
 ### Next Evidence Required
 
@@ -400,3 +400,311 @@ It does not demonstrate:
 8. Continue with users, groups, UID, GID, `root`, and `sudo` as scheduled.
 9. Reproduce the complete filesystem and permissions laboratory later without the original guide.
 10. Do not classify the filesystem block as `Recovered`, `Reproduced`, or `Consolidated` until delayed and independent evidence supports those states.
+
+---
+
+## Linux Delayed Retrieval and Identity Practice — 2026-08-21
+
+### Conditions
+
+- Filesystem and navigation concepts studied on `2026-08-20` were retested without consulting the previous guide.
+- Initial users/groups retrieval was attempted before studying the topic.
+- Initial `root`/`sudo` explanations were attempted before correction.
+- Practical identity inspection was performed in the Linux laboratory.
+- User and group administration was performed with step-by-step guidance.
+- Final conceptual retrieval was performed without consulting study material.
+- Command assistance and syntax consultation were recorded separately from conceptual understanding.
+- Previous baseline results remain unchanged.
+- This session does not demonstrate complete Linux reproduction or consolidation.
+
+### Filesystem and Navigation Delayed Retrieval
+
+#### Conceptual Retrieval
+
+The following concepts were recalled without notes:
+
+- `/` as the filesystem root and as a separator between path components.
+- `/home` as the location normally containing users' home directories.
+- `/var` as a location for variable data that changes while the system operates.
+- `/tmp` as a location for temporary files.
+- The current working directory as the directory in which the shell is currently operating.
+- The distinction between absolute and relative paths.
+- `.` as the current directory.
+- `..` as the parent directory.
+- `~` as a reference to the user's home directory.
+
+The explanation of `/etc` was substantially improved but required precision toward its role as a location for system-wide configuration.
+
+The filesystem definition remained partially imprecise and required correction.
+
+The meaning of `~` also required the precision that it represents the current user's home directory rather than `/home` itself.
+
+#### Practical Retrieval
+
+Navigation commands were executed without consulting the previous guide.
+
+Observed unaided use included:
+
+```bash
+cd ~
+pwd
+ls
+ls -la
+cd linux-lab
+cd ..
+```
+
+Navigation between the home directory, `linux-lab`, its parent, and subdirectories was completed successfully.
+
+The previous `2026-08-20` dependency on consultation for `ls -la` was not present during this retest.
+
+#### Filesystem and Navigation Assessment
+
+| Capability | Result |
+|---|---|
+| `/` | Delayed retrieval successful |
+| `/home` | Delayed retrieval successful |
+| `/etc` | Improved; precision correction required |
+| `/var` | Delayed retrieval successful |
+| `/tmp` | Delayed retrieval successful |
+| Filesystem definition | Delayed retrieval partial |
+| Current working directory | Delayed retrieval successful |
+| Absolute vs relative paths | Delayed retrieval successful |
+| `.`, `..`, `~` | Delayed retrieval successful with minor correction for `~` |
+| `cd`, `pwd`, `ls` | Delayed practical retrieval successful |
+| `ls -la` | Previous retrieval gap successfully retested |
+| Complete file-operation reproduction | Not tested |
+
+Full independent reproduction of `mkdir`, `touch`, `cp`, `mv`, `cat`, and `less` was not performed during this session.
+
+---
+
+### Users, Groups, UID and GID
+
+#### Initial Retrieval
+
+Before studying the topic:
+
+- A user was partially associated with personal files and `/home`.
+- A group could not be explained.
+- The purpose of group membership could not be explained.
+- UID was incorrectly expanded as `User Interface Display`.
+- GID was incorrectly expanded as `Graphic Interface Display`.
+
+This confirmed that the original `Users and groups` baseline gap had not already been recovered before study.
+
+#### Study and Immediate Retrieval
+
+After targeted explanation and practice, the following concepts were retrieved without consulting material:
+
+- A user is a system identity to which Linux associates processes, permissions, files, and actions.
+- A group is a logical collection of users used to manage shared access.
+- UID means `User Identifier`.
+- GID means `Group Identifier`.
+- A primary group is the main group assigned to a user.
+- Secondary groups are additional groups to which the user belongs.
+- User identity and group membership participate in later access decisions involving ownership and permissions.
+
+The distinction between primary and secondary groups initially could not be expressed precisely and required additional clarification before a concise explanation was produced.
+
+#### Identity Inspection
+
+The following commands were used:
+
+```bash
+whoami
+id
+groups
+```
+
+The outputs were interpreted to identify:
+
+- Current username.
+- UID.
+- Primary GID.
+- Primary group.
+- Secondary groups.
+
+The current laboratory user was identified with UID `1000`.
+
+`id` was correctly distinguished from `groups`: `id` exposes numerical identifiers and group membership information, while `groups` provides the group names associated with the user.
+
+---
+
+### `root` and `sudo`
+
+#### Initial Retrieval
+
+The `root` account was correctly identified as a privileged user.
+
+However, `sudo` was initially described as a privileged group rather than as the command used for authorized privileged execution.
+
+The existence of a `sudo` group contributed to this confusion.
+
+#### Correction
+
+The following distinction was established:
+
+```text
+root
+→ privileged user account
+
+sudo
+→ command used to execute an authorized command with another identity, normally root
+
+sudo group
+→ a group that may participate in the system's authorization policy
+```
+
+The `sudo` command and the `sudo` group are related concepts but are not the same object.
+
+#### Practical Validation
+
+The following sequence was executed and interpreted:
+
+```bash
+whoami
+id
+sudo whoami
+sudo id
+whoami
+id
+```
+
+Observed behaviour included:
+
+```text
+student
+→ UID 1000
+
+sudo whoami
+→ root
+
+sudo id
+→ UID 0 (root)
+
+subsequent whoami / id
+→ student / UID 1000
+```
+
+This demonstrated that commands executed through `sudo` could run with the effective identity of `root` while the normal user account remained `student`.
+
+The final unaided explanation correctly stated that `sudo` does not permanently convert the user into `root`; only the specific privileged command is executed with the elevated identity.
+
+---
+
+### Guided User and Group Administration
+
+A controlled laboratory user and group were created.
+
+The user was then added to the additional group and the result was verified.
+
+Commands used during guided practice included:
+
+```bash
+sudo adduser labuser
+sudo groupadd labgroup
+getent group labgroup
+sudo usermod -aG labgroup labuser
+id labuser
+groups labuser
+```
+
+The administration commands were not independently selected or recalled before guidance.
+
+Specific syntax gaps included:
+
+- `adduser` for user creation.
+- `groupadd` for group creation.
+- `getent group` for querying a group entry.
+- `usermod -aG` for adding a user to a supplementary group while preserving existing supplementary group memberships.
+
+The session therefore demonstrates guided administration practice rather than independent reproduction.
+
+---
+
+### Final Unaided Retrieval
+
+At the end of the session, the following were recalled without consulting study material:
+
+- User.
+- Group.
+- UID.
+- GID.
+- Basic distinction between primary and secondary groups after clarification.
+- Purpose of `whoami`.
+- Basic purpose and output of `id`.
+- Purpose of `groups`.
+- `root` as the privileged administrative account.
+- `sudo` as a command for authorized privileged execution.
+- `sudo` does not permanently convert the normal user into `root`.
+- Basic relationship between users, groups, and shared access.
+
+Final unaided retrieval was mostly correct, although the distinction between primary and secondary groups and the complete interpretation of `id` still required precision.
+
+Command syntax for the user/group administration sequence remained dependent on guidance.
+
+---
+
+### Evidence Update
+
+| Capability | Result |
+|---|---|
+| Filesystem conceptual delayed retrieval | Mostly successful; minor precision corrections required |
+| Navigation delayed retrieval | Successful for tested scope |
+| Unaided `ls -la` retrieval | Successful |
+| Complete filesystem-operation reproduction | Pending |
+| User concept | Immediate retrieval successful after study |
+| Group concept | Immediate retrieval successful after study |
+| UID/GID | Immediate retrieval successful after study |
+| Primary vs secondary groups | Understood after clarification; delayed retrieval pending |
+| `whoami`, `id`, `groups` interpretation | Practised successfully |
+| `root` concept | Understood |
+| `sudo` concept | Misconception corrected and practically validated |
+| `sudo` vs `sudo` group | Distinction corrected |
+| Normal user vs privileged effective identity | Practically validated |
+| User creation | Guided practice |
+| Group creation | Guided practice |
+| Group lookup with `getent` | Guided practice |
+| Supplementary group assignment with `usermod -aG` | Guided practice |
+| Independent user/group administration | Not demonstrated |
+| Ownership and permissions | Not tested |
+| Linux independent reproduction | Pending |
+| Linux consolidation | Pending |
+
+### Current Gaps
+
+1. Filesystem definition still requires later precise unaided retrieval.
+2. Full file-operation reproduction remains pending.
+3. Users, groups, UID/GID, and `root`/`sudo` require delayed retrieval.
+4. Primary versus secondary groups requires later unaided explanation after a delay.
+5. User/group administration command selection and syntax are not independently retrievable.
+6. `adduser`, `groupadd`, `getent`, and `usermod -aG` were used with guidance.
+7. Ownership has not yet been recovered.
+8. Permissions have not yet been recovered.
+9. `chmod`, `chown`, and `chgrp` remain pending.
+10. No controlled permission failure has yet been completed.
+11. No independent Linux reproduction has yet been demonstrated.
+
+### Next Action
+
+Proceed to:
+
+```text
+Delayed identity retrieval
+→ Ownership
+→ Owner / group / others
+→ Permissions
+→ r / w / x
+→ chmod / chown / chgrp
+→ Controlled Permission denied
+→ Evidence
+→ Diagnosis
+→ Minimal correction
+→ Validation
+→ Later independent reproduction
+```
+
+Do not classify this session as `Reproduced` or `Consolidated`.
+
+The session demonstrates delayed retrieval for a limited filesystem/navigation scope, immediate conceptual recovery for identity fundamentals, practical validation of `root`/`sudo`, and guided user/group administration.
