@@ -708,3 +708,453 @@ Delayed identity retrieval
 Do not classify this session as `Reproduced` or `Consolidated`.
 
 The session demonstrates delayed retrieval for a limited filesystem/navigation scope, immediate conceptual recovery for identity fundamentals, practical validation of `root`/`sudo`, and guided user/group administration.
+
+---
+
+## Linux Ownership and Permissions Practice — 2026-08-22
+
+### Conditions
+
+- Users, groups, UID, GID, primary and secondary groups, `root`, and `sudo` were retested conceptually without consulting notes.
+- `whoami`, `id`, and `groups` were recalled for practical identity inspection.
+- The final `s` in `groups` was initially omitted during command retrieval, while the purpose of the command remained correctly understood.
+- Ownership and permissions were then studied with step-by-step guidance.
+- Practical work was completed inside a controlled laboratory under `/home/student/permissions-lab`.
+- Permission, ownership, and group changes were verified through terminal output.
+- A final conceptual retrieval of ownership and permissions was completed without consulting notes.
+- The practical command sequence was guided and therefore does not demonstrate independent reproduction.
+- Previous baseline and practical evidence remain unchanged.
+
+### Delayed Identity Retrieval
+
+The following concepts studied on `2026-08-21` remained accessible without notes:
+
+- A user as a Linux system identity associated with files, processes, permissions, and actions.
+- A group as a logical collection of users used to manage shared access.
+- UID as `User Identifier`.
+- GID as `Group Identifier`.
+- A primary group as the user's main group.
+- Secondary groups as additional groups to which the user belongs.
+- `root` as the privileged administrative account.
+- `sudo` as a command used for authorized privileged execution without permanently changing the normal user's identity to `root`.
+
+The following commands were recalled for identity inspection:
+
+```bash
+whoami
+id
+groups
+```
+
+`whoami` returned:
+
+```text
+student
+```
+
+The purpose of the commands was recalled as:
+
+```text
+whoami
+→ shows the current username
+
+id
+→ shows the user's UID, primary GID, and group membership
+
+groups
+→ shows the groups to which the user belongs
+```
+
+The `groups` command was initially recalled without the final `s`. This represents a minor syntax retrieval error rather than a conceptual failure.
+
+### Ownership and Permission Model
+
+The ownership model was studied and applied using the following structure:
+
+```text
+File or directory
+→ owner
+→ associated group
+→ permissions for owner
+→ permissions for group
+→ permissions for others
+```
+
+The permission-selection model was understood as:
+
+```text
+Is the current user the owner?
+→ yes
+→ apply Owner permissions
+
+otherwise
+
+Does the current user belong to the group associated with the object?
+→ yes
+→ apply Group permissions
+
+otherwise
+
+→ apply Others permissions
+```
+
+The user initially required precision around the distinction between the group associated with a file or directory and the user's primary and secondary groups.
+
+The following distinction was established:
+
+```text
+User
+→ UID
+→ primary group
+→ zero or more secondary groups
+
+File or directory
+→ owner
+→ one associated group
+```
+
+A user's membership in either the primary group or one of the secondary groups can satisfy the group-membership check when that group matches the group associated with the object.
+
+The user also correctly identified that group membership does not itself define the object's `r`, `w`, and `x` permissions. It determines whether the object's Group permission category applies.
+
+### Permission Interpretation
+
+The following permissions were studied and retrieved:
+
+For files:
+
+```text
+r
+→ read file content
+
+w
+→ modify file content
+
+x
+→ permit execution when the file is otherwise executable
+```
+
+For directories:
+
+```text
+r
+→ read or list directory entries
+
+w
+→ participate in creating, deleting, or renaming entries
+
+x
+→ traverse the directory and access paths inside it
+```
+
+The distinction between `x` on a file and `x` on a directory was independently recalled:
+
+```text
+File:
+x → execution
+
+Directory:
+x → traversal
+```
+
+### Initial Laboratory State
+
+The laboratory contained:
+
+```text
+test-dir
+text.txt
+```
+
+The observed permissions were:
+
+```text
+test-dir
+drwxrwxr-x
+
+text.txt
+-rw-rw-r--
+```
+
+Both objects initially showed:
+
+```text
+Owner: student
+Group: student
+```
+
+The permission blocks were correctly interpreted as:
+
+```text
+text.txt
+
+Owner:
+rw-
+
+Group:
+rw-
+
+Others:
+r--
+```
+
+```text
+test-dir
+
+Owner:
+rwx
+
+Group:
+rwx
+
+Others:
+r-x
+```
+
+### `chmod` Practice
+
+Permission changes were performed using symbolic notation.
+
+The command:
+
+```bash
+chmod u-w text.txt
+```
+
+was predicted to change:
+
+```text
+-rw-rw-r--
+```
+
+to:
+
+```text
+-r--rw-r--
+```
+
+The observed result matched the prediction.
+
+The owner write permission was then restored with:
+
+```bash
+chmod u+w text.txt
+```
+
+The original permission state was restored.
+
+This demonstrated guided practical use of `chmod` to modify a specific permission category without changing ownership or group association.
+
+### Directory Traversal Test
+
+The owner's execute permission was removed from `test-dir`:
+
+```bash
+chmod u-x test-dir
+```
+
+The resulting permissions were:
+
+```text
+drw-rwxr-x
+```
+
+The current user was:
+
+```text
+student
+```
+
+and `student` was also the owner of `test-dir`.
+
+Attempting to enter the directory produced:
+
+```text
+Permission denied
+```
+
+This occurred even though the Group permission category still contained `x`.
+
+The behaviour demonstrated that Linux did not fall back to the Group permissions after the Owner category had been selected.
+
+The access decision was:
+
+```text
+Current user:
+student
+
+Owner:
+student
+
+Applicable category:
+Owner
+
+Owner permissions:
+rw-
+
+Required directory permission:
+x
+
+Result:
+Permission denied
+```
+
+The execute permission was then restored:
+
+```bash
+chmod u+x test-dir
+```
+
+Directory traversal succeeded again.
+
+This was a guided permission-effect validation. It was not an independently diagnosed unknown failure.
+
+### `chown` Practice
+
+The owner of `text.txt` was changed under guidance:
+
+```bash
+sudo chown labuser text.txt
+```
+
+The ownership changed from:
+
+```text
+student student
+```
+
+to:
+
+```text
+labuser student
+```
+
+The permission bits remained unchanged.
+
+The owner was then restored:
+
+```bash
+sudo chown student text.txt
+```
+
+This demonstrated that `chown` changes ownership independently of the permission-bit configuration.
+
+### `chgrp` Practice
+
+The group associated with `text.txt` was changed under guidance:
+
+```bash
+sudo chgrp labgroup text.txt
+```
+
+The object changed from:
+
+```text
+student student
+```
+
+to:
+
+```text
+student labgroup
+```
+
+The group was subsequently restored:
+
+```bash
+sudo chgrp student text.txt
+```
+
+This demonstrated that `chgrp` changes the group associated with an object without automatically changing its permission bits.
+
+### Final Unaided Retrieval
+
+After completing the guided laboratory, the following concepts were retrieved without consulting notes:
+
+- Owner as the user who owns the file or directory.
+- Group as the group associated with the object for access-control evaluation.
+- Others as users who are evaluated neither as the owner nor through the associated group.
+- `r`, `w`, and `x` for files.
+- `r`, `w`, and `x` for directories.
+- `chmod` as the command used to modify permissions.
+- `chown` as the command used to change ownership.
+- `chgrp` as the command used to change the associated group.
+- The fact that an owner without directory `x` cannot traverse the directory merely because the Group category contains `x`.
+
+Minor precision corrections were required for:
+
+- Describing the object's group as the group associated with the file or directory rather than saying that the object belongs to the group in the same way a user belongs to groups.
+- Explaining precisely why the Group category is not considered when the current user is already the owner.
+- Clarifying the relationship between primary groups, secondary groups, GIDs, and the group associated with an object.
+
+The final access-control model was correctly reconstructed as:
+
+```text
+Identity
+→ determine applicable permission category
+→ Owner OR Group OR Others
+→ evaluate required r / w / x permission
+→ allow or deny the requested operation
+```
+
+### Evidence Update
+
+| Capability | Result |
+|---|---|
+| Users, groups, UID, and GID delayed conceptual retrieval | Successful for tested scope |
+| Primary and secondary group delayed retrieval | Successful after minor terminology clarification |
+| `root` and `sudo` delayed conceptual retrieval | Successful |
+| `whoami` retrieval | Successful |
+| `id` retrieval and basic interpretation | Successful |
+| `groups` conceptual retrieval | Successful |
+| `groups` exact syntax retrieval | Minor error — final `s` initially omitted |
+| Owner / group / others model | Immediate unaided retrieval successful after study |
+| File `r`, `w`, `x` | Immediate unaided retrieval successful |
+| Directory `r`, `w`, `x` | Immediate unaided retrieval successful with minor precision correction |
+| Permission-category selection | Understood after clarification and practically observed |
+| `ls -l` permission interpretation | Practised successfully |
+| `chmod` purpose | Immediate unaided retrieval successful |
+| `chmod` practical use | Guided practice completed |
+| `chown` purpose | Immediate unaided retrieval successful |
+| `chown` practical use | Guided practice completed |
+| `chgrp` purpose | Immediate unaided retrieval successful |
+| `chgrp` practical use | Guided practice completed |
+| Directory traversal dependency on `x` | Practically validated under guidance |
+| Permission-related access failure | Observed under guidance with known cause |
+| Independent permission troubleshooting | Not demonstrated |
+| Independent ownership/permissions reproduction | Not demonstrated |
+| Linux consolidation | Pending |
+
+### Current Gaps
+
+1. Ownership and permissions have not yet been retested after a delay.
+2. `chmod`, `chown`, and `chgrp` were used during a guided command sequence rather than independently selected and executed.
+3. The permission-related access failure had a known cause because the relevant permission was deliberately removed during guided study.
+4. An unknown or independently diagnosed `Permission denied` scenario has not yet been completed.
+5. The complete access-control troubleshooting sequence has not yet been independently reproduced.
+6. The exact interaction of directory `r`, `w`, and `x` permissions requires additional practical reinforcement.
+7. Full independent Linux reproduction remains pending.
+8. Linux consolidation remains pending.
+
+### Next Action
+
+Proceed to:
+
+```text
+Controlled Permission denied
+→ inspect current user
+→ inspect UID/GID and group membership
+→ inspect owner and associated group
+→ inspect permission bits
+→ determine the applicable permission category
+→ identify the root cause before changing configuration
+→ apply one minimal correction
+→ repeat the failed operation
+→ validate recovery
+→ record all assistance used
+→ later independent reproduction
+```
+
+Do not classify ownership, permissions, `chmod`, `chown`, `chgrp`, or the Linux permission laboratory as `Reproduced` or `Consolidated`.
+
+The `2026-08-22` session demonstrates delayed retrieval of the previously studied identity fundamentals, immediate conceptual recovery of ownership and permissions, guided practical manipulation of permission and ownership state, and a guided validation of directory traversal behaviour.
